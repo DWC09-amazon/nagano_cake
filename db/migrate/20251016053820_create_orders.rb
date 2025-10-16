@@ -10,7 +10,7 @@ class CreateOrders < ActiveRecord::Migration[6.1]
       t.integer :total_payment, null: false
       t.integer :payment_method, null: false, default: 0
       t.integer :status,         null: false, default: 0
-      t.timestamps
+      t.timestamps null: false
     end
 
     add_index :orders, :payment_method
