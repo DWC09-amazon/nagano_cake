@@ -9,5 +9,7 @@ class CreateAddresses < ActiveRecord::Migration[6.1]
 
       t.timestamps null: false
     end
+    
+    add_index :addresses, :customer_id
   end
 end
