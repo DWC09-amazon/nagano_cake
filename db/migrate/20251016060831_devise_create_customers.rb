@@ -18,7 +18,7 @@ class DeviseCreateCustomers < ActiveRecord::Migration[6.1]
       t.string :first_name_kana,      null: false
 
       ## 郵便番号、住所、電話番号
-      t.string :potal_code,           null: false
+      t.string :postal_code,           null: false
       t.string :address,              null: false
       t.string :telephone_number,     null: false
 
