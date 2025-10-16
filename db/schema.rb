@@ -10,36 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2025_10_16_054549) do
-
-  create_table "order_details", force: :cascade do |t|
-    t.integer "order_id", null: false
-    t.integer "item_id", null: false
-    t.integer "price", null: false
-    t.integer "amount", null: false
-    t.integer "making_status", default: 0, null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["item_id"], name: "index_order_details_on_item_id"
-    t.index ["making_status"], name: "index_order_details_on_making_status"
-    t.index ["order_id"], name: "index_order_details_on_order_id"
-  end
-
-  create_table "orders", force: :cascade do |t|
-    t.integer "customer_id", null: false
-    t.string "postal_code", null: false
-    t.string "address", null: false
-    t.string "name", null: false
-    t.integer "shipping_cost", null: false
-    t.integer "total_payment", null: false
-    t.integer "payment_method", default: 0, null: false
-    t.integer "status", default: 0, null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["customer_id"], name: "index_orders_on_customer_id"
-    t.index ["payment_method"], name: "index_orders_on_payment_method"
-    t.index ["status"], name: "index_orders_on_status"
-  end
+ActiveRecord::Schema.define(version: 2025_10_15_083839) do
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -53,7 +24,4 @@ ActiveRecord::Schema.define(version: 2025_10_16_054549) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "order_details", "items"
-  add_foreign_key "order_details", "orders"
-  add_foreign_key "orders", "customers"
 end
