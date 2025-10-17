@@ -1,5 +1,6 @@
 class CreateOrders < ActiveRecord::Migration[6.1]
   def change
+    
     create_table :orders do |t|
       t.references :customer, null: false, foreign_key: true
 
@@ -12,8 +13,8 @@ class CreateOrders < ActiveRecord::Migration[6.1]
       t.integer :status,         null: false, default: 0
       t.timestamps null: false
     end
+    
 
-    add_index :orders, :payment_method
-    add_index :orders, :status
+    
   end
 end
