@@ -5,7 +5,7 @@ Rails.application.routes.draw do
     sessions:      "public/sessions"
   }
 
-  devise_for :admins, skip: [:registrations, :passwords], controllers: {
+  devise_for :admin, skip: [:registrations, :passwords], controllers: {
     sessions: "admin/sessions"
   }
 
@@ -30,7 +30,7 @@ Rails.application.routes.draw do
       collection { delete :destroy_all }  # /cart_items/destroy_all
     end
 
-    # お届け先
+    # 配送先
     resources :addresses, except: [:show, :new]
 
     # 注文（確認/サンクスはコレクション）
