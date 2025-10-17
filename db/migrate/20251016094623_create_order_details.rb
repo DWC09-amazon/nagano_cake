@@ -1,5 +1,6 @@
 class CreateOrderDetails < ActiveRecord::Migration[6.1]
   def change
+    
     create_table :order_details do |t|
       t.references :order, null: false, foreign_key: true
       t.references :item,  null: false, foreign_key: true
@@ -10,7 +11,8 @@ class CreateOrderDetails < ActiveRecord::Migration[6.1]
 
       t.timestamps null: false
     end
+    
 
-    add_index :order_details, :making_status
+    
   end
 end

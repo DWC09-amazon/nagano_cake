@@ -50,5 +50,5 @@ Rails.application.routes.draw do
   resources :orders,   only:   [:show, :update]
   resources :order_details, only: [:update]  # 製作ステータス更新
   end
-  end
 end
+
