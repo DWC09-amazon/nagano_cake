@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
- # Devise
+  # Devise
   devise_for :customers, skip: [:passwords], controllers: {
     registrations: "public/registrations",
     sessions:      "public/sessions"
@@ -44,11 +44,12 @@ Rails.application.routes.draw do
 
   # 管理者側（/admin 配下）
   namespace :admin do
-    root "homes#top"
-    resources :items,    except: [:destroy]
-    resources :genres,   only:   [:index, :create, :edit, :update]
-    resources :customers,only:   [:index, :show, :edit, :update]
-    resources :orders,   only:   [:show, :update]
-    resources :order_details, only: [:update]  # 製作ステータス更新
+  root "homes#top"
+  resources :items,    except: [:destroy]
+  resources :genres,   only:   [:index, :create, :edit, :update]
+  resources :customers,only:   [:index, :show, :edit, :update]
+  resources :orders,   only:   [:show, :update]
+  resources :order_details, only: [:update]  # 製作ステータス更新
   end
 end
+
