@@ -1,11 +1,12 @@
 Rails.application.routes.draw do
   # Devise
   devise_for :customers, skip: [:passwords], controllers: {
-  registrations: "public/registrations",
-  sessions:      "public/sessions"
+    registrations: "public/registrations",
+    sessions:      "public/sessions"
   }
+
   devise_for :admins, skip: [:registrations, :passwords], controllers: {
-  sessions: "admin/sessions"
+    sessions: "admin/sessions"
   }
 
   # 会員側（/ 直下）
@@ -17,16 +18,16 @@ Rails.application.routes.draw do
 
     # 会員情報（マイページ/編集/退会）
     resource :customers, only: [] do
-    get   "mypage"             => "customers#show"
-    get   "information/edit"   => "customers#edit"
-    patch "information"        => "customers#update"
-    get   "unsubscribe"        => "customers#unsubscribe"
-    patch "withdraw"           => "customers#withdraw"
+      get   "mypage"             => "customers#show"
+      get   "information/edit"   => "customers#edit"
+      patch "information"        => "customers#update"
+      get   "unsubscribe"        => "customers#unsubscribe"
+      patch "withdraw"           => "customers#withdraw"
     end
 
     # カート
     resources :cart_items, only: [:index, :create, :update, :destroy] do
-    collection { delete :destroy_all }  # /cart_items/destroy_all
+      collection { delete :destroy_all }  # /cart_items/destroy_all
     end
 
     # お届け先
