@@ -1,0 +1,57 @@
+<header>
+  <nav class="navbar navbar-expand-md navbar-light bg-light">
+    <div class="container">
+
+      <%= link_to root_path, class: "navbar-brand" do %>
+        CAKE
+      <% end %>
+
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+              aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+
+          <li class="nav-item mr-3">
+            <form class="form-inline">
+              <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">検索</button>
+            </form>
+          </li>
+
+          <% if customer_signed_in? %>
+            <li class="nav-item">
+              <%= link_to "マイページ", public_customers_my_page_path, class: "nav-link" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "商品一覧", root_path, class: "nav-link" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "カート", public_cart_items_path, class: "nav-link" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "ログアウト", destroy_customer_session_path, method: :delete, class: "nav-link" %>
+            </li>
+          <% else %>
+            <li class="nav-item">
+              <%= link_to "About", about_path, class: "nav-link" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "商品一覧", root_path, class: "nav-link" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "新規登録", new_customer_registration_path, class: "nav-link" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "ログイン", new_customer_session_path, class: "nav-link" %>
+            </li>
+          <% end %>
+
+          </ul>
+      </div>
+
+    </div>
+  </nav>
+</header>
