@@ -1,0 +1,48 @@
+<div class="container my-5">
+  <div class="row">
+    
+    <div class="col-md-3">
+      <div class="p-3 border">
+        <h5>ジャンル検索</h5>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item"><%= link_to "ケーキ", "#" %></li>
+          <li class="list-group-item"><%= link_to "焼き菓子", "#" %></li>
+          <li class="list-group-item"><%= link_to "プリン", "#" %></li>
+          <li class="list-group-item"><%= link_to "キャンディ", "#" %></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="col-md-9">
+      
+      <div class="p-4 mb-5 text-white" 
+           style="background: url(<%= asset_path('about.jpg') %>) no-repeat center center; 
+                  background-size: cover; 
+                  border-radius: 5px;">
+        
+        <div class="p-3 bg-dark bg-opacity-50" style="text-align: center; border-radius: 3px;">
+          <h2 class="text-white">ようこそ、ながのCAKEへ！</h2>
+          <p class="mb-0">このサイトは、ケーキ販売のECサイトになります。</p>
+          <p class="mb-0">会員でない方も商品の閲覧はできますが、<br>購入には会員登録が必要になります。</p>
+        </div>
+      </div>
+      
+      <h3 class="mb-4">新着商品</h3>
+      <div class="row">
+        <% 4.times do |i| %>
+          <div class="col-md-3 mb-4 text-center">
+            <div class="border d-flex justify-content-center align-items-center" style="height: 150px; overflow: hidden;">
+              <%= image_tag("cake_sample.jpg", class: "img-fluid") %>
+            </div>
+            <p class="mt-2 mb-0">商品名</p>
+            <p>¥0,000</p>
+          </div>
+        <% end %>
+      </div>
+
+      <div class="text-right">
+        <%= link_to "全ての商品を見る >", items_path %>
+      </div>
+    </div>
+  </div>
+</div>

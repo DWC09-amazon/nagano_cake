@@ -23,8 +23,8 @@ ActiveRecord::Schema.define(version: 2025_10_16_094623) do
   end
 
   create_table "admins", force: :cascade do |t|
-    t.string "email", default: "", null: false
-    t.string "encrypted_password", default: "", null: false
+    t.string "email", null: false
+    t.string "encrypted_password", null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -77,7 +77,6 @@ ActiveRecord::Schema.define(version: 2025_10_16_094623) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["genre_id"], name: "index_items_on_genre_id"
-    t.index ["name"], name: "index_items_on_name"
   end
 
   create_table "order_details", force: :cascade do |t|
