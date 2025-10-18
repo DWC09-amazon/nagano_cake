@@ -1,0 +1,84 @@
+<div class="container mt-5">
+  <h2 class="mb-4 fw-bold pb-2">
+    <%= "#{@customer.last_name}#{@customer.first_name}さんの会員情報編集" %>
+  </h2>
+
+  <%= form_with model: @customer, url: admin_customer_path(@customer), method: :patch, local: true do |f| %>
+    <div class="mb-3 row">
+      <label class="col-sm-3 col-form-label fw-semibold">会員ID</label>
+      <div class="col-sm-9 pt-2">
+              <%= @customer.id %>
+            </div>
+          </div>
+
+          <div class="mb-3 row">
+            <label class="col-sm-3 col-form-label fw-semibold">氏名</label>
+            <div class="col-sm-4">
+              <%= f.text_field :last_name, class: "form-control", placeholder: "姓" %>
+            </div>
+            <div class="col-sm-5">
+              <%= f.text_field :first_name, class: "form-control", placeholder: "名" %>
+            </div>
+          </div>
+
+          <div class="mb-3 row">
+            <label class="col-sm-3 col-form-label fw-semibold">フリガナ</label>
+            <div class="col-sm-4">
+              <%= f.text_field :last_name_kana, class: "form-control", placeholder: "セイ" %>
+            </div>
+            <div class="col-sm-5">
+              <%= f.text_field :first_name_kana, class: "form-control", placeholder: "メイ" %>
+            </div>
+          </div>
+
+          <div class="mb-3 row">
+            <label class="col-sm-3 col-form-label fw-semibold">郵便番号</label>
+            <div class="col-sm-9">
+              <%= f.text_field :postal_code, class: "form-control", placeholder: "例）1234567" %>
+            </div>
+          </div>
+
+          <div class="mb-3 row">
+            <label class="col-sm-3 col-form-label fw-semibold">住所</label>
+            <div class="col-sm-9">
+              <%= f.text_field :address, class: "form-control", placeholder: "住所を入力" %>
+            </div>
+          </div>
+
+          <div class="mb-3 row">
+            <label class="col-sm-3 col-form-label fw-semibold">電話番号</label>
+            <div class="col-sm-9">
+              <%= f.text_field :telephone_number, class: "form-control", placeholder: "例）09012345678" %>
+            </div>
+          </div>
+
+          <div class="mb-3 row">
+            <label class="col-sm-3 col-form-label fw-semibold">メールアドレス</label>
+            <div class="col-sm-9">
+              <%= f.email_field :email, class: "form-control", placeholder: "example@example.com" %>
+            </div>
+          </div>
+
+          <div class="mb-4 row align-items-center">
+            <label class="col-sm-3 col-form-label fw-semibold">会員ステータス</label>
+            <div class="col-sm-9">
+              <div class="form-check form-check-inline">
+                <%= f.radio_button :is_active, true, class: "form-check-input", id: "status_active" %>
+                <%= f.label :is_active, "有効", class: "form-check-label text-success fw-semibold", for: "status_active" %>
+              </div>
+              <div class="form-check form-check-inline">
+                <%= f.radio_button :is_active, false, class: "form-check-input", id: "status_inactive" %>
+                <%= f.label :is_active, "退会", class: "form-check-label text-secondary fw-semibold", for: "status_inactive" %>
+              </div>
+            </div>
+          </div>
+
+          <div class="text-center">
+            <%= f.submit "変更を保存", class: "btn btn-success px-4 me-2" %>
+            <%= link_to "戻る", admin_customer_path(@customer), class: "btn btn-outline-secondary px-4" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
