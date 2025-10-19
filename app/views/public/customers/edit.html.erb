@@ -1,0 +1,72 @@
+<h1>会員情報編集</h1>
+
+<%# フォームヘルパー: @customerの情報を更新するため、モデルとして@customerを指定 %>
+<%# URLはルーティングの/customers/information (update) に自動で向かいます %>
+<%= form_with model: @customer, url: information_customers_path, method: :patch, local: true do |f| %>
+  
+  <%# バリデーションエラー表示 %>
+  <%= render 'layouts/error_messages', resource: @customer %> 
+  
+  <div class="form-group row mb-3">
+    <%= f.label :氏名, class: "col-md-3 col-form-label" %>
+    <div class="col-md-3">
+      <%# last_name (姓) %>
+      <%= f.text_field :last_name, class: "form-control" %>
+    </div>
+    <div class="col-md-3">
+      <%# first_name (名) %>
+      <%= f.text_field :first_name, class: "form-control" %>
+    </div>
+  </div>
+
+  <div class="form-group row mb-3">
+    <%= f.label :フリガナ, class: "col-md-3 col-form-label" %>
+    <div class="col-md-3">
+      <%# last_name_kana (セイ) %>
+      <%= f.text_field :last_name_kana, class: "form-control" %>
+    </div>
+    <div class="col-md-3">
+      <%# first_name_kana (メイ) %>
+      <%= f.text_field :first_name_kana, class: "form-control" %>
+    </div>
+  </div>
+  
+  <div class="form-group row mb-3">
+    <%= f.label :郵便番号, class: "col-md-3 col-form-label" %>
+    <div class="col-md-6">
+      <%= f.text_field :postal_code, class: "form-control" %>
+    </div>
+  </div>
+  
+  <div class="form-group row mb-3">
+    <%= f.label :住所, class: "col-md-3 col-form-label" %>
+    <div class="col-md-6">
+      <%= f.text_field :address, class: "form-control" %>
+    </div>
+  </div>
+
+  <div class="form-group row mb-3">
+    <%= f.label :電話番号, class: "col-md-3 col-form-label" %>
+    <div class="col-md-6">
+      <%= f.text_field :telephone_number, class: "form-control" %>
+    </div>
+  </div>
+
+  <div class="form-group row mb-4">
+    <%= f.label :メールアドレス, class: "col-md-3 col-form-label" %>
+    <div class="col-md-6">
+      <%= f.email_field :email, class: "form-control" %>
+    </div>
+  </div>
+  
+  <%# 編集内容を保存ボタン (緑色) %>
+  <div class="d-flex justify-content-start mt-4">
+    <div class="mr-3">
+      <%= f.submit '編集内容を保存', class: 'btn btn-success' %>
+    </div>
+    
+    <%# 退会するボタン (赤色) - ルーティング情報に基づき/customers/unsubscribeへ %>
+    <%= link_to '退会する', unsubscribe_customers_path, class: 'btn btn-danger' %>
+  </div>
+
+<% end %>
