@@ -1,0 +1,37 @@
+<div class="container">
+  <h2>ジャンル一覧・追加</h2>
+
+  <%= form_with model: @genre, url: admin_genres_path, local: true do |f| %>
+    <div>
+      <%= f.label :name, "ジャンル名" %>
+      <%= f.text_field :name %>
+      <%= f.submit "新規登録" %>
+    </div>
+  <% end %>
+
+  <hr>
+
+  <% if @genre.errors.any? %>
+    <div id="error_explanation">
+      <h3><%= @genre.errors.count %>件のエラーがあります。</h3>
+      <ul>
+        <% @genre.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <h3>登録済みジャンル</h3>
+  <table>
+
+    <tbody>
+      <% @genres.each do |genre| %>
+        <tr>
+          <td><%= genre.name %></td>
+          <td><%= link_to "編集", edit_admin_genre_path(genre) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
