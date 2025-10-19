@@ -1,0 +1,57 @@
+<%# ページタイトル: 画像のように背景が薄いグレーのタイトルを実現 %>
+<div class="d-inline-block p-2 mb-4 bg-light border border-secondary">
+  <h2 class="h5 mb-0">マイページ</h2>
+</div>
+
+<div class="container p-0">
+  <%# 登録情報セクション %>
+  <h3 class="d-inline-block font-weight-bold mb-0 mr-3">登録情報</h3>
+  
+  <%# 編集ボタン: 「登録情報」の横に配置。d-inline-blockで見出しと横並びに %>
+  <%= link_to '編集する', information_edit_customers_path, class: 'btn btn-success btn-sm mb-3' %>
+
+  <%# 登録情報のテーブル %>
+  <table class="table table-bordered user-info-table" style="max-width: 600px;">
+    <tbody>
+      <tr>
+        <%# thに背景色なし、枠線はtable-borderedで対応 %>
+        <th scope="row" class="text-left" style="width: 30%;">氏名</th> 
+        <td><%= @customer.last_name %> <%= @customer.first_name %></td>
+      </tr>
+      <tr>
+        <th scope="row" class="text-left">カナ</th>
+        <td><%= @customer.last_name_kana %> <%= @customer.first_name_kana %></td>
+      </tr>
+      <tr>
+        <th scope="row" class="text-left">郵便番号</th>
+        <td><%= @customer.postal_code %></td>
+      </tr>
+      <tr>
+        <th scope="row" class="text-left">住所</th>
+        <td><%= @customer.address %></td>
+      </tr>
+      <tr>
+        <th scope="row" class="text-left">電話番号</th>
+        <td><%= @customer.telephone_number %></td>
+      </tr>
+      <tr>
+        <th scope="row" class="text-left">メールアドレス</th>
+        <td><%= @customer.email %></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <hr class="mt-5 mb-4">
+
+  <%# 配送先セクション %>
+  <h3 class="font-weight-bold mb-2">配送先</h3>
+  <%# 画像のような青いボタン。btn-primaryで青、サイズを大きくするためにw-25で幅指定 %>
+  <%= link_to '一覧を見る', addresses_path, class: 'btn btn-primary w-25 mb-4' %>
+
+  <hr>
+  
+  <%# 注文履歴セクション %>
+  <h3 class="font-weight-bold mb-2">注文履歴</h3>
+  <%# 画像のような青いボタン。w-25で幅指定 %>
+  <%= link_to '一覧を見る', orders_path, class: 'btn btn-primary w-25 mb-4' %>
+</div>
