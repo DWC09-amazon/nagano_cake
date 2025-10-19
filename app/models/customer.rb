@@ -21,5 +21,11 @@ class Customer < ApplicationRecord
   # 電話番号（10〜11桁の半角数字）
   validates :telephone_number, presence: true, format: { with: /\A\d{10,11}\z/, message: "はハイフンなしで入力してください" }
 
-  enum is_active: { active: 0, inactive: 1 }
+  before_create :set_default_is_active
+
+  private
+
+  def set_default_is_active
+    self.is_active = true if is_active.nil?
+  end
 end

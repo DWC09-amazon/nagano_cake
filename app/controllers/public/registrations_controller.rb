@@ -49,7 +49,7 @@ class Public::RegistrationsController < Devise::RegistrationsController
       :first_name_kana,   # メイ
       :postal_code,       # 郵便番号
       :address,           # 住所
-      :telephone_number   # 電話番号
+      :telephone_number,   # 電話番号
       :is_active          # 会員ステータス
     ])
   end
