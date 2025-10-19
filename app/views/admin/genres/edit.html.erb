@@ -1,0 +1,25 @@
+<div class="container">
+  <h2>ジャンル編集</h2>
+
+  <%= form_with model: @genre, url: admin_genre_path(@genre), method: :patch, local: true do |f| %>
+    <% if @genre.errors.any? %>
+      <div id="error_explanation">
+        <h3><%= @genre.errors.count %>件のエラーがあります。</h3>
+        <ul>
+          <% @genre.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div>
+      <%= f.label :name, "ジャンル名" %>
+      <%= f.text_field :name %>
+      <%= f.submit "更新" %>
+    </div>
+  <% end %>
+
+  <br>
+  <%= link_to "一覧に戻る", admin_genres_path %>
+</div>
