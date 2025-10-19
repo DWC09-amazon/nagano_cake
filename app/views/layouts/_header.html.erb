@@ -2,8 +2,12 @@
   <nav class="navbar navbar-expand-md navbar-light bg-light">
     <div class="container">
 
-      <%= link_to root_path, class: "navbar-brand" do %>
-        CAKE
+      <% if admin_signed_in? %>
+        <span class="navbar-brand">CAKE</span>
+      <% else %>
+        <%= link_to root_path, class: "navbar-brand" do %>
+          CAKE
+        <% end %>
       <% end %>
 
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
@@ -21,7 +25,23 @@
             </form>
           </li>
 
-          <% if customer_signed_in? %>
+          <% if admin_signed_in? %>
+            <li class="nav-item">
+              <%= link_to "商品一覧", admin_items_path, class: "nav-link" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "会員一覧", admin_customers_path, class: "nav-link" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "注文履歴一覧", admin_root_path, class: "nav-link" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "ジャンル一覧", admin_genres_path, class: "nav-link" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "nav-link" %>
+            </li>
+          <% elsif customer_signed_in? %>
             <li class="nav-item">
               <%= link_to "マイページ", public_customers_my_page_path, class: "nav-link" %>
             </li>
@@ -49,7 +69,7 @@
             </li>
           <% end %>
 
-          </ul>
+        </ul>
       </div>
 
     </div>

@@ -50,6 +50,7 @@ class Public::RegistrationsController < Devise::RegistrationsController
       :postal_code,       # 郵便番号
       :address,           # 住所
       :telephone_number   # 電話番号
+      :is_active          # 会員ステータス
     ])
   end
 
