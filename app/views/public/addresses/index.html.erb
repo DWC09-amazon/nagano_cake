@@ -3,6 +3,7 @@
     <span class="px-4" style="background-color: #e8e8e8;">配送先登録 / 一覧</span>
   </h4>
 
+  <%= render 'layouts/error_messages', resource: @address %>
   <div class ="table-responsive">
     <%= form_with model: @address, local: true do |f| %>
       <table class="table table-borderless">
@@ -34,7 +35,7 @@
               <%= f.submit "新規登録", class: "btn btn-success" %>
             </td>
           </tr>
-        <tbody>
+        </tbody>
       </table>
     <% end %>
   </div>

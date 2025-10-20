@@ -3,6 +3,7 @@
     <span class="px-4" style="background-color: #e8e8e8;">配送先編集</span>
   </h4>
 
+  <%= render 'layouts/error_messages', resource: @address %>
   <div class ="table-responsive">
     <%= form_with model: @address, local: true do |f| %>
       <table class="table table-borderless">
@@ -34,7 +35,7 @@
               <%= f.submit "変更内容を保存", class: "btn btn-success" %>
             </td>
           </tr>
-        <tbody>
+        </tbody>
       </table>
     <% end %>
   </div>
