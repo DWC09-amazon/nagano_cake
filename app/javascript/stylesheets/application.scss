@@ -1,1 +1,8 @@
 @use '~bootstrap/scss/bootstrap';
+
+// Bootstrapのデフォルトの枠線色（灰色）から（黒）に上書き
+.table-bordered,
+.table-bordered th,
+.table-bordered td {
+  border: 1px solid black !important;
+}
