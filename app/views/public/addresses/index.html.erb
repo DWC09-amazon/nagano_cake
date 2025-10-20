@@ -1,0 +1,62 @@
+<div class="container mt-5">
+  <h4 class="mb-3">
+    <span class="px-4" style="background-color: #e8e8e8;">配送先登録 / 一覧</span>
+  </h4>
+
+  <div class ="table-responsive">
+    <%= form_with model: @address, local: true do |f| %>
+      <table class="table table-borderless">
+        <tbody>
+          <tr>
+            <th style="width: 30%;">
+              <%= f.label :postal_code, "郵便番号（ハイフンなし）" %>
+            </th>
+            <td class="py-2">
+              <%= f.text_field :postal_code, class="form-control w-50", placeholder: "0000000" %>
+            </td>
+          </tr>
+          <tr>
+            <th>
+              <%= f.label :address, "住所" %>
+            </th>
+            <td class="py-2 d-flex gap-2">
+              <%= f.text_field :address, placeholder: "東京都渋谷区代々木神園町0-0" %>
+            </td>
+          </tr>
+          <tr>
+            <th>
+              <%= f.label :name, "宛名" %>
+            </th>
+            <td>
+              <%= f.text_field :name, class="form-control w-50", placeholder: "令和道子" %>
+            </td>
+            <td>
+              <%= f.submit "新規登録", class: "btn btn-success" %>
+            </td>
+          </tr>
+        <tbody>
+      </table>
+    <% end %>
+  </div>
+
+  <div class ="table-responsive">
+    <table class="table table-bordered">
+      <thead class="thead-light">
+        <tr><th>郵便番号</th><th>住所</th><th>宛名</th><th></th>
+      </thead>
+      <tbody>
+        <% @addresses.each do |address| %>
+          <tr>
+            <td><%= address.postal_code %></td>
+            <td><%= address.address %></td>
+            <td><%= address.name %></td>
+            <td>
+              <% link_to "編集する", edit_address_path(address), class: "btn btn-sm btn-success" %>
+              <% link_to "削除する", address_path(address), method: :delete, data: { confirm: "削除しますか？" }, class: "btn btn-sm btn-danger" %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
