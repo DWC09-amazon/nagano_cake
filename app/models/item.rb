@@ -1,5 +1,32 @@
 class Item < ApplicationRecord
   belongs_to :genre
+  has_one_attached :item_image
   has_many :cart_items, dependent: :destroy
   has_many :order_details, dependent: :destroy
+
+  # ジャンルは必須
+  validates :genre_id, presence: true
+
+  # 商品名は必須
+  validates :name, presence: true
+
+  # 商品説明文は必須
+  validates :introduction, presence: true
+
+  # 金額は0以上の整数が必須
+  validates :price, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
+
+  # 消費税8%で計算
+  def tax_included_price
+    (price * 1.08).floor
+  end
+
+  def get_item_image(width, height)
+    unless item_image.attached?
+      file_path = Rails.root.join('app/assets/images/no_image.jpg')
+      item_image.attach(io: File.open(file_path), filename: 'default-image.jpg', content_type: 'image/jpeg')
+    end
+    item_image.variant(resize_to_limit: [width, height]).processed
+  end
+
 end
