@@ -1,56 +1,57 @@
 <div class="container mt-5">
-  <h4 class="mb-4">
-    <span class="px-4" style="background-color: #e8e8e8;">
-      <%= "#{@customer.last_name}#{@customer.first_name}さんの会員詳細" %>
-    </span>
-  </h4>
+  <div class="row mb-4">
+    <h4>
+      <span class="px-4" style="background-color: #e8e8e8;">
+        <%= "#{@customer.last_name}#{@customer.first_name}さんの会員詳細" %>
+      </span>
+    </h4>
+  </div>
 
-  <div class ="table-responsive" style="max-width: 50%;">
+  <div class ="table-responsive" style="max-width: 80%;">
     <table class="table table-borderless">
       <tbody>
         <tr>
-          <td>会員ID</td>
+          <th class="align-middle">会員ID</th>
           <td><%= @customer.id %></td>
         </tr>
-          <tr>
-          <td>氏名</td>
+        <tr>
+          <td class="align-middle">氏名</td>
           <td><%= "#{@customer.last_name}　#{@customer.first_name}" %></td>
         </tr>
         <tr>
-          <td>フリガナ</td>
+          <td class="align-middle">フリガナ</td>
           <td><%= "#{@customer.last_name_kana}　#{@customer.first_name_kana}" %></td>
         </tr>
         <tr>
-          <td>郵便番号</td>
+          <td class="align-middle">郵便番号</td>
           <td><%= @customer.postal_code %></td>
         </tr>
         <tr>
-          <td>住所</td>
+          <td class="align-middle">住所</td>
           <td><%= @customer.address %></td>
         </tr>
         <tr>
-          <td>電話番号</td>
+          <td class="align-middle">電話番号</td>
           <td><%= @customer.telephone_number %></td>
         </tr>
         <tr>
-          <td>メールアドレス</td>
+          <td class="align-middle">メールアドレス</td>
           <td><%= @customer.email %></td>
         </tr>
-          <td>会員ステータス</td>
+        <tr>
+          <td class="align-middle">会員ステータス</td>
           <td>
             <% if @customer.is_active? %>
-              <span class="text-success fw-bold">有効</span>
+              <span class="text-success font-weight-bold">有効</span>
             <% else %>
-              <span class="text-secondary fw-bold">退会</span>
+              <span class="text-muted font-weight-bold">退会</span>
             <% end %>
           </td>
         </tr>
         <tr>
           <td></td>
           <td>
-            <%= link_to "編集する", edit_admin_customer_path(@customer), class: "btn btn-success mr-2" %>
-          </td>
-          <td>
+            <%= link_to "編集する", edit_admin_customer_path(@customer), class: "btn btn-success", style: "margin-right: 80px;" %>
             <%= link_to "注文一覧を見る", admin_root_path, class: "btn btn-primary" %>
           </td>
         </tr>
