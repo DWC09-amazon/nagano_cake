@@ -1,0 +1,50 @@
+<%= form_with model: [:admin, item], local: true do |f| %>
+
+  <% if item.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= item.errors.count %>件のエラーがあります。</h2>
+      <ul>
+        <% item.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :item_image, "商品画像" %><br>
+    <%= f.file_field :item_image %>
+  </div>
+
+  <div class="field">
+    <%= f.label :name, "商品名" %><br>
+    <%= f.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :introduction, "商品説明" %><br>
+    <%= f.text_area :introduction %>
+  </div>
+
+  <div class="field">
+    <%= f.label :genre_id, "ジャンル" %><br>
+    <%= f.collection_select :genre_id, genres, :id, :name, { prompt: "選択してください" } %>
+  </div>
+
+  <div class="field">
+    <%= f.label :price, "税抜価格" %><br>
+    <%= f.number_field :price %> 円
+  </div>
+
+  <div class="field">
+    <%= f.label :is_active, "販売ステータス" %><br>
+    <%= f.radio_button :is_active, true %>
+    <%= f.label :is_active, "販売中", { value: true } %>
+    <%= f.radio_button :is_active, false %>
+    <%= f.label :is_active, "販売停止中", { value: false } %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit item.new_record? ? "新規登録" : "変更を保存", class: "btn btn-success" %>
+  </div>
+<% end %>

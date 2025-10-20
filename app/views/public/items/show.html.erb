@@ -1,0 +1,54 @@
+<h1>商品詳細</h1>
+
+<div class="row">
+  <div class="col-md-4">
+    <%= image_tag @item.get_item_image(300, 300) %>
+  </div>
+
+  <div class="col-md-8">
+    <table class="table table-borderless">
+      <tbody>
+        <tr>
+          <th>商品名</th>
+          <td><%= @item.name %></td>
+        </tr>
+        <tr>
+          <th>商品説明</th>
+          <td><%= @item.introduction %></td>
+        </tr>
+        <tr>
+          <th>税抜価格</th>
+          <td><%= @item.price.to_s(:delimited) %> 円</td>
+        </tr>
+        <tr>
+          <th>税込価格</th>
+          <td class="h4 text-danger"><%= @item.tax_included_price.to_s(:delimited) %> 円</td>
+        </tr>
+        
+        <%# 販売中の場合のみカート追加フォームを表示 %>
+        <% if @item.is_active? %>
+          <tr>
+            <th></th>
+            <td>
+              <%# カートアイテム追加フォーム（カート機能実装時に使用） %>
+              <%= form_with model: @cart_item, url: cart_items_path, method: :post, local: true do |f| %>
+                <%= f.hidden_field :item_id, value: @item.id %>
+                
+                <%# 数量選択 %>
+                <%= f.select :amount, *[1..10], { prompt: "数量を選択" } %>
+                
+                <%= f.submit "カートに入れる", class: "btn btn-success ml-3" %>
+              <% end %>
+            </td>
+          </tr>
+        <% else %>
+          <tr>
+            <th>販売状況</th>
+            <td><span class="text-secondary h5">販売停止中です</span></td>
+          </tr>
+        <% end %>
+        
+      </tbody>
+    </table>
+  </div>
+</div>

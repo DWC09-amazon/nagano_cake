@@ -1,0 +1,56 @@
+<div class="row">
+  
+  <div class="col-md-3">
+    <table class="table table-bordered bg-light">
+      <thead>
+        <tr class="table-active">
+          <th class="h5">ジャンル検索</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><%= link_to "全商品", items_path %></td>
+        </tr>
+        
+        <% @genres.each do |genre| %>
+          <tr>
+            <td>
+              <%= link_to genre.name, items_path(genre_id: genre.id) %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="col-md-9">
+    <% if @current_genre.present? %>
+      <h1 class="mb-4">商品一覧 (<%= @current_genre.name %>一覧)</h1>
+    <% else %>
+      <h1 class="mb-4">商品一覧 (全<%= @items_count %>件)</h1>
+    <% end %>
+
+    <div class="row">
+      <% @items.each do |item| %>
+        <div class="col-md-3 mb-4 text-center">
+          <div class="card border-0">
+            <%= link_to item_path(item) do %>
+              <%= image_tag item.get_item_image(200, 200), size: "200x200" %>
+            <% end %>
+            
+            <div class="card-body p-0 pt-2">
+              <p class="card-text text-dark mb-1">
+                <%= link_to item.name, item_path(item) %>
+              </p>
+
+              <p class="card-text">
+                ¥<%= item.tax_included_price.to_s(:delimited) %> (税込)
+              </p>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    
+  </div>
+</div>
