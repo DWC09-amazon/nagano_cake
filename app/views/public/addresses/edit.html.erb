@@ -1,0 +1,39 @@
+<div class="container my-5">
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+      
+      <h2 class="mb-4 d-inline-block p-2 bg-light">配送先編集</h2>
+      
+      <%= form_with(model: @address, url: address_path(@address), method: :patch) do |f| %>
+        
+        <%= render 'layouts/error_messages', resource: @address %>
+
+        <table class="table table-borderless">
+          <tr>
+            <th class="align-middle" style="width: 200px;">郵便番号(ハイフンなし)</th>
+            <td>
+              <%= f.text_field :postal_code, class: 'form-control', placeholder: '例: 4001114' %>
+            </td>
+          </tr>
+          <tr>
+            <th class="align-top">住所</th>
+            <td>
+              <%= f.text_field :address, class: 'form-control', placeholder: '例: 山梨県甲斐市打返 4-5-19' %>
+            </td>
+          </tr>
+          <tr>
+            <th class="align-top">宛名</th>
+            <td>
+              <%= f.text_field :name, class: 'form-control', placeholder: '例: 小沢時男' %>
+            </td>
+          </tr>
+        </table>
+
+        <div class="text-left mt-4">
+          <%= f.submit '変更内容を保存', class: 'btn btn-success btn-lg' %>
+        </div>
+      <% end %>
+      
+    </div>
+  </div>
+</div>
