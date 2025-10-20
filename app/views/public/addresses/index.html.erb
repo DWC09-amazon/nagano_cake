@@ -13,7 +13,7 @@
               <%= f.label :postal_code, "郵便番号（ハイフンなし）" %>
             </th>
             <td class="py-2">
-              <%= f.text_field :postal_code, class="form-control w-50", placeholder: "0000000" %>
+              <%= f.text_field :postal_code, class: "form-control w-50", placeholder: "0000000" %>
             </td>
           </tr>
           <tr>
@@ -21,7 +21,7 @@
               <%= f.label :address, "住所" %>
             </th>
             <td class="py-2 d-flex gap-2">
-              <%= f.text_field :address, placeholder: "東京都渋谷区代々木神園町0-0" %>
+              <%= f.text_field :address, class: "form-control w-75", placeholder: "東京都渋谷区代々木神園町0-0" %>
             </td>
           </tr>
           <tr>
@@ -29,7 +29,7 @@
               <%= f.label :name, "宛名" %>
             </th>
             <td>
-              <%= f.text_field :name, class="form-control w-50", placeholder: "令和道子" %>
+              <%= f.text_field :name, class: "form-control w-50", placeholder: "令和道子" %>
             </td>
             <td>
               <%= f.submit "新規登録", class: "btn btn-success" %>
@@ -52,8 +52,8 @@
             <td><%= address.address %></td>
             <td><%= address.name %></td>
             <td>
-              <% link_to "編集する", edit_address_path(address), class: "btn btn-sm btn-success" %>
-              <% link_to "削除する", address_path(address), method: :delete, data: { confirm: "削除しますか？" }, class: "btn btn-sm btn-danger" %>
+              <%= link_to "編集する", edit_address_path(address), class: "btn btn-sm btn-success" %>
+              <%= link_to "削除する", address_path(address), method: :delete, data: { confirm: "削除しますか？" }, class: "btn btn-sm btn-danger" %>
             </td>
           </tr>
         <% end %>

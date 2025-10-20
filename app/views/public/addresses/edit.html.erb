@@ -13,7 +13,7 @@
               <%= f.label :postal_code, "郵便番号（ハイフンなし）" %>
             </th>
             <td class="py-2">
-              <%= f.text_field :postal_code, class="form-control w-50", placeholder: "0000000" %>
+              <%= f.text_field :postal_code, class: "form-control w-50", placeholder: "0000000" %>
             </td>
           </tr>
           <tr>
@@ -21,7 +21,7 @@
               <%= f.label :address, "住所" %>
             </th>
             <td class="py-2 d-flex gap-2">
-              <%= f.text_field :address, placeholder: "東京都渋谷区代々木神園町0-0" %>
+              <%= f.text_field :address, class: "form-control w-75", placeholder: "東京都渋谷区代々木神園町0-0" %>
             </td>
           </tr>
           <tr>
@@ -29,7 +29,7 @@
               <%= f.label :name, "宛名" %>
             </th>
             <td>
-              <%= f.text_field :name, class="form-control w-50", placeholder: "令和道子" %>
+              <%= f.text_field :name, class: "form-control w-50", placeholder: "令和道子" %>
             </td>
             <td>
               <%= f.submit "変更内容を保存", class: "btn btn-success" %>
