@@ -10,14 +10,12 @@
   <%= form_with model: @customer, url: admin_customer_path(@customer), method: :patch, local: true do |f| %>
     <%= render "public/shared/error_messages", resource: @customer %>
 
-    <div class ="table-responsive">
+    <div class ="table-responsive" style="max-width: 80%;">
       <table class="table table-borderless">
         <tbody>
           <tr>
             <th class="align-middle">会員ID</th>
-            <td><%= @customer.id %></td>
-            <td></td>
-            <td></td>
+            <td colspan="3"><%= @customer.id %></td>
           </tr>
           <tr>
             <th class="align-middle">氏名</th>
@@ -54,7 +52,7 @@
               </div>
               <div class="form-check form-check-inline">
                 <%= f.radio_button :is_active, false, class: "form-check-input", id: "status_inactive" %>
-                <%= f.label :is_active, "退会", class: "form-check-label text-secondary font-weight-bold", for: "status_inactive" %>
+                <%= f.label :is_active, "退会", class: "form-check-label text-muted font-weight-bold", for: "status_inactive" %>
               </div>
             </td>
           </tr>
