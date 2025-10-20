@@ -1,17 +1,20 @@
 <div class="container my-5">
   <div class="row">
     
-    <div class="col-md-3">
-      <div class="p-3 border">
-        <h5>ジャンル検索</h5>
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item"><%= link_to "ケーキ", "#" %></li>
-          <li class="list-group-item"><%= link_to "焼き菓子", "#" %></li>
-          <li class="list-group-item"><%= link_to "プリン", "#" %></li>
-          <li class="list-group-item"><%= link_to "キャンディ", "#" %></li>
-        </ul>
-      </div>
-    </div>
+  <div class="col-md-3">
+  <div class="p-3 border">
+    <h5>ジャンル検索</h5>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item"><%= link_to "全商品", items_path %></li>
+      
+      <% @genres.each do |genre| %>
+        <li class="list-group-item">
+          <%= link_to genre.name, items_path(genre_id: genre.id) %>
+        </li>
+      <% end %>
+      </ul>
+  </div>
+</div>
 
     <div class="col-md-9">
       
