@@ -1,35 +1,57 @@
-<h2>ログイン</h2>
+<div class="container mt-5">
+  <div class="row mb-3">
+    <h4>
+      <span class="px-4" style="background-color: #e8e8e8;">ログイン</span>
+    </h4>
+  </div>
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+  <%= render 'layouts/error_messages', resource: @customer %>
+  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+    <div class="row">
+      <span class="px-3 font-weight-bold" style="background-color: #e8e8e8;">会員の方はこちらからログイン</span>
+    </div>
 
-  <table>
-    <tbody>
-      <tr>会員の方はこちらからログイン</tr>
-      <tr>
-        <td><%= f.label :email, "メールアドレス" %></td>
-        <td><%= f.email_field :email, autofocus: true, autocomplete: "email" %></td>
-      </tr>
-      <tr>
-        <td><%= f.label :password, "パスワード" %></td>
-        <td><%= f.password_field :password, autocomplete: "current-password" %></td>
-      </tr>
-      <tr>
-        <td>
-          <% if devise_mapping.rememberable? %>
-            <div class="field">
-              <%= f.check_box :remember_me %>
-              <%= f.label :remember_me %>
-            </div>
-          <% end %>
-        </td>
-        <td><%= f.submit "ログイン" %></td>
-      </tr>
-    </tbody>
-  </table>
-<% end %>
+    <div class="form-group row justify-content-center mt-3">
+      <div class="col-md-3">
+        <%= f.label :email, "メールアドレス", class: "col-form-label" %>
+      </div>
+      <div class="col-md-5">
+        <%= f.email_field :email, class:"form-control", autofocus: true, autocomplete: "email", placeholder: "sample@example.com" %>
+      </div>
+    </div>
 
-<p>会員登録がお済みでない方</p>
+    <div class="form-group row justify-content-center">
+      <div class="col-md-3">
+        <%= f.label :password, "パスワード" %>
+      </div>
+      <div class="col-md-5">
+        <%= f.password_field :password, class:"form-control", autocomplete: "current-password" %>
+      </div>
+    </div>
 
-<span>
-  <%= render "public/shared/links" %>  から新規登録を行ってください
-</span>
+    <% if devise_mapping.rememberable? %>
+      <div class="form-group row justify-content-center mt-3">
+        <div class="text-center">
+          <%= f.check_box :remember_me %>
+          <%= f.label :remember_me, "ログイン情報を保存する" %>
+        </div>
+      </div>
+    <% end %>
+
+    <div class="form-group row justify-content-center">
+      <%= f.submit "ログイン", class: "btn btn-primary px-5" %>
+    </div>
+  <% end %>
+
+  <div class="row mt-5">
+    <span class="px-3 font-weight-bold" style="background-color: #e8e8e8;">会員登録がお済みでない方</span>
+  </div>
+
+  <div class="row d-flex mt-3">
+    <div class="col-md-2"></div>
+    <div class="col-md-4 d-flex">
+      <%= render "public/shared/links" %>
+      <span class="ml-2">から新規登録を行ってください</span>
+    </div>
+  </div>
+</div>
