@@ -12,4 +12,8 @@ class Order < ApplicationRecord
     ready_to_ship:       3,
     shipped:             4
   }
+
+  def total_price
+    order_details.sum { |detail| detail.price * detail.amount }
+  end
 end
