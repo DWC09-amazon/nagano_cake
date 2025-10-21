@@ -9,4 +9,8 @@ class OrderDetail < ApplicationRecord
     making:     2,
     done:       3
   }
+
+  def subtotal
+    price * amount
+  end
 end
