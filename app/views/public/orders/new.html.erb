@@ -1,0 +1,64 @@
+<h4 class="mb-3">
+<span class="px-4" style="background-color: #e8e8e8;">注文情報入力</span>
+</h4>
+
+<%= form_with model: @order, url: confirm_orders_path, method: :post do |f| %>
+
+  <section>
+    <h4>支払い方法</h4>
+    
+    <div>
+      <%= f.radio_button :payment_method, 0, checked: true %>
+      <%= f.label :payment_method_credit_card, "クレジットカード" %>
+    </div>
+    
+    <div>
+      <%= f.radio_button :payment_method, 1 %>
+      <%= f.label :payment_method_bank_transfer, "銀行振込" %>
+    </div>
+  </section>
+
+  <section>
+    <h4>お届け先</h4>
+    
+    <div>
+      <%= radio_button_tag 'order[select_address]', 0, true %>
+      <%= label_tag 'order_select_address_0', 'ご自身の住所' %>
+      <p>
+        〒<%= current_customer.postal_code %> <%= current_customer.address %><br>
+        <%= current_customer.last_name %><%= current_customer.first_name %>
+      </p>
+    </div>
+
+    <div>
+      <%= radio_button_tag 'order[select_address]', 1 %>
+      <%= label_tag 'order_select_address_1', '登録済住所から選択' %>
+      
+      <%= select_tag 'order[address_id]', options_from_collection_for_select(@addresses, :id, :address_display) %>
+    </div>
+
+    <div>
+      <%= radio_button_tag 'order[select_address]', 2 %>
+      <%= label_tag 'order_select_address_2', '新しいお届け先' %>
+
+      <div>
+        <%= f.label :postal_code, '郵便番号(ハイフンなし)' %>
+        <%= f.text_field :postal_code, placeholder: '0000000' %>
+      </div>
+
+      <div>
+        <%= f.label :address, '住所' %>
+        <%= f.text_field :address, placeholder: '東京都渋谷区代々木神園町0-0' %>
+      </div>
+
+      <div>
+        <%= f.label :name, '宛名' %>
+        <%= f.text_field :name, placeholder: '令和道子' %>
+      </div>
+    </div>
+  </section>
+  
+  <div class="actions">
+    <%= f.submit '確認画面へ進む' %>
+  </div>
+<% end %>
