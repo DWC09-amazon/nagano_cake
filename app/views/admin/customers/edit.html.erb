@@ -1,69 +1,69 @@
-<div class="container mt-5">
-  <h4 class="mb-4">
-    <span class="px-4" style="background-color: #e8e8e8;">
-      <%= "#{@customer.last_name}#{@customer.first_name}さんの会員情報編集" %>
-    </span>
-  </h4>
+<div class="container mt-5 mb-5">
+  <div class="row mb-4">
+    <h4>
+      <span class="px-4" style="background-color: #e8e8e8;">
+        <%= "#{@customer.last_name}#{@customer.first_name}さんの会員情報編集" %>
+      </span>
+    </h4>
+  </div>
 
-  <div class="table-responsive">
-    <%= form_with model: @customer, url: admin_customer_path(@customer), method: :patch, local: true do |f| %>
-      <table class="table-borderless">
+  <%= form_with model: @customer, url: admin_customer_path(@customer), method: :patch, local: true do |f| %>
+    <%= render "public/shared/error_messages", resource: @customer %>
+
+    <div class ="table-responsive" style="max-width: 80%;">
+      <table class="table table-borderless">
         <tbody>
           <tr>
-            <th style="width: 30%;">会員ID</th>
-            <td class="py-2"><%= @customer.id %></td>
+            <th class="align-middle">会員ID</th>
+            <td colspan="3"><%= @customer.id %></td>
           </tr>
           <tr>
-            <th>氏名</th>
-            <td class="py-2 d-flex gap-2">
-              <%= f.text_field :last_name, class: "form-control me-3", placeholder: "姓" %>
-              <%= f.text_field :first_name, class: "form-control", placeholder: "名" %>
-            </td>
+            <th class="align-middle">氏名</th>
+            <td><%= f.text_field :last_name, class: "form-control", autofocus:true, placeholder: "姓" %></td>
+            <td><%= f.text_field :first_name, class: "form-control", placeholder: "名" %></td>
           </tr>
           <tr>
-            <th class="fw-semibold">フリガナ</th>
-            <td class="py-2 d-flex gap-2">
-              <%= f.text_field :last_name_kana, class: "form-control", placeholder: "セイ" %>
-              <%= f.text_field :first_name_kana, class: "form-control", placeholder: "メイ" %>
-            </td>
+            <th class="align-middle">フリガナ</th>
+            <td><%= f.text_field :last_name_kana, class: "form-control", placeholder: "セイ" %></td>
+            <td><%= f.text_field :first_name_kana, class: "form-control", placeholder: "メイ" %></td>
           </tr>
           <tr>
-            <th class="fw-semibold">郵便番号</th>
-            <td class="py-2"><%= f.text_field :postal_code, class: "form-control", placeholder: "0000000" %></td>
+            <th class="align-middle">郵便番号</th>
+            <td><%= f.text_field :postal_code, class: "form-control", placeholder: "0000000" %></td>
           </tr>
           <tr>
-            <th class="fw-semibold">住所</th>
-            <td class="py-2"><%= f.text_field :address, class: "form-control", placeholder: "住所を入力" %></td>
+            <th class="align-middle">住所</th>
+            <td colspan="3"><%= f.text_field :address, class: "form-control", placeholder: "住所を入力" %></td>
           </tr>
           <tr>
-            <th class="fw-semibold">電話番号</th>
-            <td class="py-2"><%= f.text_field :telephone_number, class: "form-control", placeholder: "0000000000" %></td>
+            <th class="align-middle">電話番号</th>
+            <td><%= f.text_field :telephone_number, class: "form-control", placeholder: "0000000000" %></td>
           </tr>
           <tr>
-            <th class="fw-semibold">メールアドレス</th>
-            <td class="py-2"><%= f.email_field :email, class: "form-control", placeholder: "example@example.com" %></td>
+            <th class="align-middle">メールアドレス</th>
+            <td><%= f.email_field :email, class: "form-control", placeholder: "example@example.com" %></td>
           </tr>
           <tr>
-            <th class="fw-semibold">会員ステータス</th>
-            <td class="py-2">
+            <th class="align-middle">会員ステータス</th>
+            <td>
               <div class="form-check form-check-inline">
                 <%= f.radio_button :is_active, true, class: "form-check-input", id: "status_active" %>
-                <%= f.label :is_active, "有効", class: "form-check-label text-success fw-bold", for: "status_active" %>
+                <%= f.label :is_active, "有効", class: "form-check-label text-success font-weight-bold", for: "status_active" %>
               </div>
               <div class="form-check form-check-inline">
                 <%= f.radio_button :is_active, false, class: "form-check-input", id: "status_inactive" %>
-                <%= f.label :is_active, "退会", class: "form-check-label text-secondary fw-bold", for: "status_inactive" %>
+                <%= f.label :is_active, "退会", class: "form-check-label text-muted font-weight-bold", for: "status_inactive" %>
               </div>
             </td>
           </tr>
           <tr>
             <td></td>
             <td>
-              <%= f.submit "変更を保存", class: "btn btn-success px-4 me-2" %>
+              <%= f.submit "変更を保存", class: "btn btn-success px-4 py-2 mr-2" %>
             </td>
           </tr>
         </tbody>
       </table>
-    <% end %>
-  </div>
+    </div>
+  <% end %>
 </div>
