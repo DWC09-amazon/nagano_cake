@@ -16,7 +16,7 @@
         <% @cart_items.each do |cart_item| %>
           <tr>
             <td><%= cart_item.item.name %></td>
-            <td><%= (cart_item.item.price * 1.08).round.to_s(:delimited) %></td>
+            <td><%= (cart_item.item.price * 1.1).round.to_s(:delimited) %></td>
             <td><%= cart_item.amount %></td>
             <td><%= cart_item.subtotal.to_s(:delimited) %></td>
           </tr>
@@ -50,9 +50,9 @@
           <td><%= @total_item_price.to_s(:delimited) %></td>
         </tr>
         <tr>
-          <th class="table-info">請求金額</th>
-          <td class="table-info">
-            **<%= @total_payment.to_s(:delimited) %>**
+          <th>請求金額</th>
+          <td>
+            <%= @total_payment.to_s(:delimited) %>
           </td>
         </tr>
       </tbody>
@@ -61,7 +61,7 @@
 </div>
 
 <div class="text-center">
-  <%= form_with url: public_orders_path, method: :post, local: true do |f| %>
+  <%= form_with url: orders_path, method: :post, local: true do |f| %>
 
     <%= f.hidden_field :payment_method, value: @order.payment_method %>
     <%= f.hidden_field :postal_code, value: @order.postal_code %>

@@ -6,19 +6,32 @@ class Public::OrdersController < ApplicationController
     @addresses = current_customer.addresses
   end
 
-  def confirm
-    @order = Order.new(order_params)
+  def show
+    @order = current_customer.orders.find(params[:id]) 
+  end
 
-    if params[:order][:select_address] == "0"
+  def confirm
+    order_params_hash = order_params.to_h
+    
+    if order_params_hash[:payment_method].present?
+      order_params_hash[:payment_method] = order_params_hash[:payment_method].to_i
+    end
+    
+    select_address = order_params_hash.delete(:select_address) 
+    address_id = order_params_hash.delete(:address_id)         
+  
+    @order = Order.new(order_params_hash)
+    
+    if select_address == "0"
       @order.postal_code = current_customer.postal_code
       @order.address = current_customer.address
-      @order.name = current_customer.full_name
-    elsif params[:order][:select_address] == "1"
-      address = current_customer.addresses.find(params[:order][:address_id])
+      @order.name = current_customer.last_name + current_customer.first_name 
+    elsif select_address == "1"
+      address = current_customer.addresses.find(address_id) 
       @order.postal_code = address.postal_code
       @order.address = address.address
       @order.name = address.name
-    elsif params[:order][:select_address] == "2"
+    elsif select_address == "2"
     else
       flash.now[:alert] = "お届け先を選択してください。"
       @addresses = current_customer.addresses
@@ -40,7 +53,6 @@ class Public::OrdersController < ApplicationController
       shipping_cost: @shipping_cost,
       total_payment: @total_payment
     }
-
   end
 
   def create
@@ -68,11 +80,11 @@ class Public::OrdersController < ApplicationController
       
       session.delete(:order)
 
-      redirect_to public_orders_thanks_path
+      redirect_to thanks_orders_path
       
     else
       flash[:alert] = "注文情報に不備があります。再度確認してください。"
-      redirect_to public_orders_new_path
+      redirect_to new_order_path
     end
   end
 

@@ -16,9 +16,9 @@ class Item < ApplicationRecord
   # 金額は0以上の整数が必須
   validates :price, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
 
-  # 消費税8%で計算
+  # 消費税10%で計算
   def tax_included_price
-    (price * 1.08).floor
+    (price * 1.1).floor
   end
 
   def get_item_image(width, height)
