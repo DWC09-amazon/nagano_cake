@@ -7,25 +7,37 @@ class Public::CartItemsController < ApplicationController
   end
 
   def create
-    product_id = params[:cart_item][:product_id]
-    amount = params[:cart_item][:amount].to_i
+    item_id = params[:item_id].to_i 
+
+    amount = params[:amount].to_i
     
-    cart_item = current_customer.cart_items.find_by(product_id: product_id)
+    if amount <= 0
+      redirect_to item_path(item_id), alert: "数量を正しく選択してください。"
+      return 
+    end
+
+    cart_item = current_customer.cart_items.find_by(item_id: item_id)
 
     if cart_item.present? 
       cart_item.amount += amount
       cart_item.save
+      redirect_to cart_items_path, notice: "商品をカートに追加しました。"
     else 
       cart_item = current_customer.cart_items.new(cart_item_params)
-      cart_item.save
+      if cart_item.save
+        redirect_to cart_items_path, notice: "商品をカートに追加しました。"
+      else
+        redirect_to item_path(item_id), alert: cart_item.errors.full_messages.join(", ") 
+      end
     end
-    redirect_to cart_items_path, notice: "商品をカートに追加しました。"
   end
+
   
   
   def update
     cart_item = current_customer.cart_items.find(params[:id])
-    if cart_item.update(cart_item_params)
+    
+    if cart_item.update(update_params)
       redirect_to cart_items_path, notice: "数量を変更しました。"
     else
       redirect_to cart_items_path, alert: "数量の変更に失敗しました。"
@@ -50,6 +62,10 @@ class Public::CartItemsController < ApplicationController
   end
   
   def cart_item_params
-    params.require(:cart_item).permit(:product_id, :amount)
+    params.permit(:item_id, :amount)
+  end
+
+  def update_params
+    params.require(:cart_item).permit(:amount) 
   end
 end

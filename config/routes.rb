@@ -3,15 +3,6 @@ Rails.application.routes.draw do
     get 'homes/top'
   end
   namespace :public do
-    get 'items/index'
-    get 'items/show'
-  end
-  namespace :admin do
-    get 'customers/index'
-    get 'customers/show'
-    get 'customers/edit'
-  end
-  namespace :public do
     get 'homes/top'
     get 'homes/about'
   end
