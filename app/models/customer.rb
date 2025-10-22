@@ -23,6 +23,10 @@ class Customer < ApplicationRecord
 
   before_create :set_default_is_active
 
+  def active_for_authentication?
+    super && (is_active == true)
+  end
+
   private
 
   def set_default_is_active
