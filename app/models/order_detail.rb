@@ -11,6 +11,10 @@ class OrderDetail < ApplicationRecord
   }
 
   def subtotal
-    price * amount
+    item.tax_included_price * amount
+  end
+
+  def self.making_status_i18n(key)
+    I18n.t("enums.order_detail.making_status.#{key}")
   end
 end

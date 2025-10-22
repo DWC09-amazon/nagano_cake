@@ -13,7 +13,15 @@ class Order < ApplicationRecord
     shipped:             4
   }
 
-  def total_price
-    order_details.sum { |detail| detail.price * detail.amount }
+  def grand_total_price
+    order_details.sum(&:subtotal) + shipping_cost
+  end
+
+  def self.payment_method_i18n(key)
+    I18n.t("enums.order.payment_method.#{key}")
+  end
+
+  def self.status_i18n(key)
+    I18n.t("enums.order.status.#{key}")
   end
 end
