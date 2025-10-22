@@ -4,12 +4,12 @@ ja:
       payment_method:
         credit_card: "クレジットカード"
         bank_transfer: "銀行振込"
-        status:
-          waiting_for_deposit: "入金待ち"
-          payment_confirmed: "入金確認"
-          in_production: "制作中"
-          ready_to_ship: "発送準備中"
-          shipped: "発送済み"
+      status:
+        waiting_for_deposit: "入金待ち"
+        payment_confirmed: "入金確認"
+        in_production: "制作中"
+        ready_to_ship: "発送準備中"
+        shipped: "発送済み"
     order_detail:
       making_status:
         impossible: "製作不可"
