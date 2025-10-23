@@ -91,6 +91,8 @@ GEM
     enum_help (0.0.20)
       activesupport (>= 3.0.0)
     erubi (1.13.1)
+    faker (3.5.2)
+      i18n (>= 1.8.11, < 2)
     ffi (1.17.2)
     ffi (1.17.2-arm64-darwin)
     ffi (1.17.2-x86_64-darwin)
@@ -277,6 +279,7 @@ DEPENDENCIES
   capybara (>= 3.26)
   devise
   enum_help
+  faker
   image_processing (~> 1.2)
   jbuilder (~> 2.7)
   kaminari (~> 1.2.1)
