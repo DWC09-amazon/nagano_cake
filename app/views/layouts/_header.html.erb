@@ -2,12 +2,8 @@
   <nav class="navbar navbar-expand-md navbar-light bg-light">
     <div class="container">
 
-      <% if admin_signed_in? %>
-        <span class="navbar-brand">ながのCAKE</span>
-      <% else %>
-        <%= link_to root_path, class: "navbar-brand" do %>
-          ながのCAKE
-        <% end %>
+      <%= link_to root_path, class: "navbar-brand" do %>
+        <%= image_tag "logo.png", alt: "ながのCAKE", height: '50' %>
       <% end %>
 
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
