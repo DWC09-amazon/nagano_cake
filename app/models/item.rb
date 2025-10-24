@@ -4,9 +4,6 @@ class Item < ApplicationRecord
   has_many :cart_items, dependent: :destroy
   has_many :order_details, dependent: :destroy
 
-  # ジャンルは必須
-  validates :genre_id, presence: true
-
   # 商品名は必須
   validates :name, presence: true
 
