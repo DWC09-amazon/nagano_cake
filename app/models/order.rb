@@ -13,6 +13,8 @@ class Order < ApplicationRecord
     shipped:             4
   }
 
+  after_update :update_making_statuses, if: :saved_change_to_status?
+
   def grand_total_price
     order_details.sum(&:subtotal) + shipping_cost
   end
@@ -23,5 +25,13 @@ class Order < ApplicationRecord
 
   def self.status_i18n(key)
     I18n.t("enums.order.status.#{key}")
+  end
+
+  private
+
+  def update_making_statuses
+    if status == "payment_confirmed"
+      order_details.update_all(making_status: :waiting)
+    end
   end
 end
