@@ -128,7 +128,7 @@ item_data.each do |data|
     introduction: data[:introduction],
     genre: genre,
     price: rand(300..800),
-    is_active: 0
+    is_active: 1
   )
 
   # 画像ファイルをattach（app/assets/images/items/ 以下に保存）
