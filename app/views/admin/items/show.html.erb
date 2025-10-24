@@ -2,7 +2,7 @@
 
 <p>商品ID: <%= @item.id %></p>
 <% if @item.item_image.attached? %>
-  <%= image_tag @item.item_image, size: "200x200" %>
+  <%= image_tag @item.item_image, style: "height: 200px; width: auto;" %>
 <% else %>
   <p>画像はありません</p>
 <% end %>
