@@ -19,7 +19,7 @@ class Customer < ApplicationRecord
   # 住所（必須）
   validates :address, presence: true
   # 電話番号（10〜11桁の半角数字）
-  validates :telephone_number, presence: true, format: { with: /\A\d{10,11}\z/, message: "電話番号はハイフンを含めず、10桁または11桁で入力してください。" }
+  validates :telephone_number, presence: true, format: { with: /\A\d{10,11}\z/, message: "はハイフンを含めず、10桁または11桁で入力してください。" }
 
   before_create :set_default_is_active
 
