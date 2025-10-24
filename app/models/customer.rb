@@ -15,11 +15,11 @@ class Customer < ApplicationRecord
   validates :last_name_kana,  presence: true, format: { with: /\A[ァ-ヶー－]+\z/, message: "は全角カタカナで入力してください" }
   validates :first_name_kana, presence: true, format: { with: /\A[ァ-ヶー－]+\z/, message: "は全角カタカナで入力してください" }
   # 郵便番号（7桁の半角数字）
-  validates :postal_code, presence: true, format: { with: /\A\d{7}\z/, message: "はハイフンなし7桁で入力してください" }
+  validates :postal_code, presence: true, format: { with: /\A\d{7}\z/, message: "はハイフンを含めず、7桁で入力してください" }
   # 住所（必須）
   validates :address, presence: true
   # 電話番号（10〜11桁の半角数字）
-  validates :telephone_number, presence: true, format: { with: /\A\d{10,11}\z/, message: "はハイフンなしで入力してください" }
+  validates :telephone_number, presence: true, format: { with: /\A\d{10,11}\z/, message: "電話番号はハイフンを含めず、10桁または11桁で入力してください。" }
 
   before_create :set_default_is_active
 
