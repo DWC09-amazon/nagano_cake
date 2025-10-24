@@ -101,4 +101,10 @@ class Public::OrdersController < ApplicationController
     params.require(:order).permit(:payment_method, :postal_code, :address, :name, :shipping_cost, :total_payment, :select_address, :address_id)
   end
 
+  def check_cart
+    if current_customer.cart_items.empty?
+      redirect_to cart_path, alert: "カートに商品が入っていないため、注文できません。"
+    end
+  end
+
 end
