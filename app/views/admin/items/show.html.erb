@@ -1,24 +1,45 @@
 <h1>商品詳細</h1>
 
-<p>商品ID: <%= @item.id %></p>
-<% if @item.item_image.attached? %>
-  <%= image_tag @item.item_image, size: "200x200" %>
-<% else %>
-  <p>画像はありません</p>
-<% end %>
+<div class="row mt-4">
+  <div class="col-md-4">
+    <% if @item.item_image.attached? %>
+      <%= image_tag @item.item_image, size: "250x250", class: "img-fluid rounded" %>
+    <% else %>
+      <div class="border p-5 text-center bg-light">
+        [画像はありません]
+      </div>
+    <% end %>
+  </div>
 
-<p>商品名: <%= @item.name %></p>
-<p>商品説明: <%= @item.introduction %></p>
-<p>ジャンル: <%= @item.genre.name %></p>
-<p>税抜価格: <%= @item.price.to_s(:delimited) %> 円</p>
-<p>税込価格: <%= @item.tax_included_price.to_s(:delimited) %> 円</p>
-<p>販売ステータス:
-  <% if @item.is_active? %>
-    <span class="text-success">販売中</span>
-  <% else %>
-    <span class="text-secondary">販売停止中</span>
-  <% end %>
-</p>
+ <div class="col-md-8">
+    <dl class="row">
+      
+      <dt class="col-sm-3">商品名</dt>
+      <dd class="col-sm-9"><%= @item.name %></dd>
 
-<%= link_to "編集する", edit_admin_item_path(@item), class: "btn btn-info" %>
-<%= link_to "一覧に戻る", admin_items_path, class: "btn btn-secondary" %>
+      <dt class="col-sm-3">商品説明</dt>
+      <dd class="col-sm-9"><%= @item.introduction %></dd>
+
+      <dt class="col-sm-3">ジャンル</dt>
+      <dd class="col-sm-9"><%= @item.genre.name %></dd>
+
+      <dt class="col-sm-3">税込価格<br>（税抜価格）</dt>
+      <dd class="col-sm-9">
+        <span class="font-weight-bold"><%= @item.tax_included_price.to_s(:delimited) %></span> (<%= @item.price.to_s(:delimited) %>) 円
+      </dd>
+
+      <dt class="col-sm-3">販売ステータス</dt>
+      <dd class="col-sm-9 font-weight-bold">
+        <% if @item.is_active? %>
+          <span class="text-success">販売中</span>
+        <% else %>
+          <span class="text-secondary">販売停止中</span>
+        <% end %>
+      </dd>
+    </dl>
+
+    <div class="mt-4">
+      <%= link_to "編集する", edit_admin_item_path(@item), class: "btn btn-success" %>
+    </div>
+  </div>
+</div>
