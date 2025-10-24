@@ -1,24 +1,56 @@
-# README
+# 🍰 ながのCAKE
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## 🌸 アプリケーション概要
+長野県にある小さな洋菓子店「ながのCAKE」の商品を全国へ販売するためのECサイトです。  
+Instagramを通じて全国から注文が増加したことをきっかけに、通販および注文管理を効率化するために開発されました。
 
-Things you may want to cover:
+🔗 **アプリURL**： http://127.0.0.1:8080/
 
-* Ruby version
+---
 
-* System dependencies
+## 📝 アプリケーション詳細
+ながのCAKEは、**受注生産型の通販サイト**です。  
+顧客がWeb上で商品を注文し、店舗側が製作・発送までを管理できます。  
+注文ごとに「製作ステータス」と「注文ステータス」を管理することで、製作・発送工程を明確にしています。
 
-* Configuration
+- 通販形式：受注生産型（製作後に発送）
+- 送料：全国一律 800円（1配送あたり）
+- 支払方法：クレジットカード or 銀行振込
+- 配送先：本人以外（プレゼント等）も指定可能
 
-* Database creation
+---
 
-* Database initialization
+## ⚙️ 使用技術
 
-* How to run the test suite
+### フロントエンド
+- HTML / CSS / JavaScript
+- Bootstrap
+- Kaminari（ページネーション）
 
-* Services (job queues, cache servers, search engines, etc.)
+### バックエンド
+- Ruby on Rails 6.1.7.10  
+- Ruby 3.1.2p20
 
-* Deployment instructions
+### データベース
+- SQLite 3.8.0（開発環境）
 
-* ...
+### インフラ
+- AWS（EC2使用）
+
+---
+
+## 🧰 環境構築手順
+
+1. リポジトリをクローン
+   ```bash
+   git clone <このリポジトリのURL>
+   cd nagano_cake
+
+---
+
+## 🪪ライセンス
+このプロジェクトは学習目的のサンプル開発として作成されています。
+
+---
+
+© 2025 ながのCAKE
