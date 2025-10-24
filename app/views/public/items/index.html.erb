@@ -35,7 +35,7 @@
         <div class="col-md-3 mb-4 text-center">
           <div class="card border-0">
             <%= link_to item_path(item) do %>
-              <%= image_tag item.get_item_image(200, 200), size: "200x200" %>
+              <%= image_tag item.get_item_image(200, 200), style: "width:200px; height:auto;" %>
             <% end %>
             
             <div class="card-body p-0 pt-2">
