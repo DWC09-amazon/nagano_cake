@@ -11,40 +11,77 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :item_image, "商品画像" %><br>
-    <%= f.file_field :item_image %>
+  <div class="container my-5">
+
+    <div class="row mb-3 align-items-center">
+      <div class="col-md-3 text-md-right">
+        <%= f.label :item_image, "商品画像" %>
+      </div>
+      <div class="col-md-9">
+        <%= f.file_field :item_image %>
+      </div>
+    </div>
+
+    <div class="row mb-3 align-items-center">
+      <div class="col-md-3 text-md-right">
+        <%= f.label :name, "商品名" %>
+      </div>
+      <div class="col-md-4">
+        <%= f.text_field :name, class: 'form-control', placeholder: '商品名' %>
+      </div>
+    </div>
+
+    <div class="row mb-3"> 
+      <div class="col-md-3 text-md-right">
+        <%= f.label :introduction, "商品説明" %>
+      </div>
+      <div class="col-md-6">
+        <%= f.text_area :introduction, rows: 5, class: 'form-control', placeholder: 'ここに説明文を記述します' %>
+      </div>
+    </div>
+
+    <div class="row mb-3 align-items-center">
+      <div class="col-md-3 text-md-right">
+        <%= f.label :genre_id, "ジャンル" %>
+      </div>
+      <div class="col-md-3">
+        <%= f.collection_select :genre_id, genres, :id, :name, { prompt: "選択してください" }, class: 'custom-select' %>
+      </div>
+    </div>
+
+    <div class="row mb-3 align-items-center">
+      <div class="col-md-3 text-md-right">
+        <%= f.label :price, "税抜価格" %>
+      </div>
+      <div class="col-md-3 d-flex align-items-center">
+        <%= f.number_field :price, class: 'form-control mr-2', placeholder: '1000' %>
+        円
+      </div>
+    </div>
+
+    <div class="row mb-4 align-items-center">
+      <div class="col-md-3 text-md-right">
+        <%= f.label :is_active, "販売ステータス" %>
+      </div>
+      <div class="col-md-9">
+        <div class="form-check form-check-inline">
+          <%= f.radio_button :is_active, true, class: 'form-check-input' %>
+          <%= f.label :is_active_true, "販売中", class: 'form-check-label' %>
+        </div>
+        <div class="form-check form-check-inline">
+          <%= f.radio_button :is_active, false, class: 'form-check-input' %>
+          <%= f.label :is_active_false, "販売停止中", class: 'form-check-label' %>
+        </div>
+      </div>
+    </div>
+    
+    <div class="row mt-5">
+      <div class="col-md-3"></div> 
+      <div class="col-md-9">
+        <%= f.submit item.new_record? ? "新規登録" : "変更を保存", class: "btn btn-success px-4" %>
+      </div>
+    </div>
+
   </div>
 
-  <div class="field">
-    <%= f.label :name, "商品名" %><br>
-    <%= f.text_field :name %>
-  </div>
-
-  <div class="field">
-    <%= f.label :introduction, "商品説明" %><br>
-    <%= f.text_area :introduction %>
-  </div>
-
-  <div class="field">
-    <%= f.label :genre_id, "ジャンル" %><br>
-    <%= f.collection_select :genre_id, genres, :id, :name, { prompt: "選択してください" } %>
-  </div>
-
-  <div class="field">
-    <%= f.label :price, "税抜価格" %><br>
-    <%= f.number_field :price %> 円
-  </div>
-
-  <div class="field">
-    <%= f.label :is_active, "販売ステータス" %><br>
-    <%= f.radio_button :is_active, true %>
-    <%= f.label :is_active, "販売中", { value: true } %>
-    <%= f.radio_button :is_active, false %>
-    <%= f.label :is_active, "販売停止中", { value: false } %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit item.new_record? ? "新規登録" : "変更を保存", class: "btn btn-success" %>
-  </div>
 <% end %>

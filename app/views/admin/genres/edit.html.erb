@@ -1,11 +1,15 @@
-<div class="container">
-  <h2>ジャンル編集</h2>
+<div class="container my-5">
+  
+  <h4 class="mb-5">
+    <span class="px-3 py-1" style="background-color: #f8f9fa; border: 1px solid #dee2e6;">ジャンル編集</span>
+  </h4>
 
   <%= form_with model: @genre, url: admin_genre_path(@genre), method: :patch, local: true do |f| %>
+    
     <% if @genre.errors.any? %>
-      <div id="error_explanation">
-        <h3><%= @genre.errors.count %>件のエラーがあります。</h3>
-        <ul>
+      <div id="error_explanation" class="mb-4">
+        <h3 class="text-danger"><%= @genre.errors.count %>件のエラーがあります。</h3>
+        <ul class="text-danger">
           <% @genre.errors.full_messages.each do |message| %>
             <li><%= message %></li>
           <% end %>
@@ -13,13 +17,18 @@
       </div>
     <% end %>
 
-    <div>
-      <%= f.label :name, "ジャンル名" %>
-      <%= f.text_field :name %>
-      <%= f.submit "更新" %>
+    <div class="row align-items-center">
+      <div class="col-md-2 text-md-right">
+        <%= f.label :name, "ジャンル名" %>
+      </div>
+      <div class="col-md-3">
+        <%= f.text_field :name, class: 'form-control', placeholder: 'キャンディ' %>
+      </div>
+      <div class="col-md-2">
+        <%= f.submit "変更を保存", class: 'btn btn-success' %>
+      </div>
     </div>
+    
   <% end %>
 
-  <br>
-  <%= link_to "一覧に戻る", admin_genres_path %>
-</div>
+  </div>

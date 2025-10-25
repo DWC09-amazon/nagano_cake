@@ -24,19 +24,24 @@
   </div>
 
   <div class="col-md-9">
+  <h1 class="mb-4">
     <% if @current_genre.present? %>
-      <h1 class="mb-4">商品一覧 (<%= @current_genre.name %>一覧)</h1>
+      <%= @current_genre.name %>一覧 (全<%= @items_count %>件)
     <% else %>
-      <h1 class="mb-4">商品一覧 (全<%= @items_count %>件)</h1>
+      商品一覧 (全<%= @items_count %>件)
     <% end %>
+  </h1>
 
     <div class="row">
       <% @items.each do |item| %>
         <div class="col-md-3 mb-4 text-center">
           <div class="card border-0">
-            <%= link_to item_path(item) do %>
-              <%= image_tag item.get_item_image(200, 200), size: "200x200" %>
-            <% end %>
+            
+            <div class="image-wrapper d-flex justify-content-center align-items-center mx-auto" style="height: 200px; width: 200px; overflow: hidden;">
+              <%= link_to item_path(item) do %>
+                <%= image_tag item.get_item_image(200, 200), class: "img-fluid", style: "max-height: 100%; max-width: 100%; object-fit: contain;" %>
+              <% end %>
+            </div>
             
             <div class="card-body p-0 pt-2">
               <p class="card-text text-dark mb-1">
