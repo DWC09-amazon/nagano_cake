@@ -19,7 +19,7 @@
     </thead>
     <tbody>
       <% @cart_items.each do |cart_item| %>
-        <tr>
+        <tr class="align-middle">
           <td><%= image_tag cart_item.item.get_item_image(50, 50), size: "50x50" %></td> 
           <td><%= cart_item.item.name %></td>
           <td><%= cart_item.item.tax_included_price.to_s(:delimited) %></td>
@@ -27,13 +27,19 @@
           <td>
             <%= form_with model: cart_item, url: cart_item_path(cart_item), method: :patch, local: true do |f| %>
               <div class="d-flex align-items-center">
-                <%= f.select :amount, (1..10).to_a, selected: cart_item.amount, class: 'form-control mr-2' %>
+                
+                <%= f.select :amount, (1..10).to_a, selected: cart_item.amount, 
+                            class: 'custom-select custom-select-sm', 
+                            style: 'width: 60px; margin-right: 10px;' %>
+                
+                &nbsp; 
+                
                 <%= f.submit '変更', class: 'btn btn-success btn-sm' %>
                 <%= f.hidden_field :item_id, value: cart_item.item_id %>
               </div>
             <% end %>
           </td>
-          
+                    
           <td><%= cart_item.subtotal.to_s(:delimited) %></td>
           
           <td>
