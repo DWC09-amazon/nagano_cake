@@ -35,7 +35,7 @@
         <% @new_items.each do |item| %>  <div class="col-md-3 mb-4 text-center">
             
             <%= link_to item_path(item) do %> <div class="border d-flex justify-content-center align-items-center" style="height: 150px; overflow: hidden;">
-                <%= image_tag item.get_item_image(150, 150), size: "150x150" %>
+                <%= image_tag item.get_item_image(150, 150), style: "width: 150px; height: auto;" %>
               </div>
             <% end %>
             
