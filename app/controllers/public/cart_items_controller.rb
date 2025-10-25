@@ -67,6 +67,6 @@ class Public::CartItemsController < ApplicationController
   end
 
   def update_params
-    params.require(:cart_item).permit(:amount) 
+    params.require(:cart_item).permit(:amount)
   end
 end
