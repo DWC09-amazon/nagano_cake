@@ -6,120 +6,76 @@ Faker::Config.locale = :ja
 
 # 初期化
 puts "=====データを削除中...====="
-Admin.destroy_all
-Customer.destroy_all
-Address.destroy_all
-Genre.destroy_all
-Item.destroy_all
-CartItem.destroy_all
-Order.destroy_all
-OrderDetail.destroy_all
+[Admin, Customer, Address, Genre, Item, CartItem, Order, OrderDetail].each(&:destroy_all)
 puts "=====削除完了====="
 
-sleep(0.5)
-
-# テストデータ作成
-
-# 管理者
+# 管理者作成
 Admin.create!(email: "admin@example.com", password: "password")
 puts "=====管理者を作成しました====="
 
-# 一般会員
+# 一般会員作成
 customers = []
-
-clean_phone_number_fixed = Faker::PhoneNumber.cell_phone.delete("()-. ")
-
 customers << Customer.create!(
-    last_name: "令和",
-    first_name: "道子",
-    last_name_kana: "レイワ",
-    first_name_kana: "ミチコ",
-    email: "example@example.com",
-    password: "password",
-    postal_code: Faker::Number.number(digits: 7),
-    address: Faker::Address.full_address,
-    telephone_number: clean_phone_number_fixed,
-    is_active: true
+  last_name: "令和",
+  first_name: "道子",
+  last_name_kana: "レイワ",
+  first_name_kana: "ミチコ",
+  email: "example@example.com",
+  password: "password",
+  postal_code: "0000000",
+  address: "東京都渋谷区代々木神園町0-0",
+  telephone_number: "0800000000",
+  is_active: true
 )
-
-14.times do
-  last_name_kanji = Faker::Name.last_name
-  first_name_kanji = Faker::Name.first_name
-
-  last_name_kana_dummy = "セイ"
-  first_name_kana_dummy = "メイ"
-
-  clean_phone_number = Faker::PhoneNumber.cell_phone.delete("()-. ")
-
+10.times do
   customers << Customer.create!(
-    last_name: last_name_kanji,
-    first_name: first_name_kanji,
-    last_name_kana: last_name_kana_dummy,
-    first_name_kana: first_name_kana_dummy,
+    last_name: Faker::Name.last_name,
+    first_name: Faker::Name.first_name,
+    last_name_kana: "セイ",
+    first_name_kana: "メイ",
     email: Faker::Internet.unique.email,
     password: "password",
-    postal_code: Faker::Number.number(digits: 7),
-    address: Faker::Address.full_address,
-    telephone_number: clean_phone_number,
+    postal_code:  "0000000",
+    address: "東京都港区六本木3-2-1",
+    telephone_number: "0900000000",
     is_active: true
   )
 end
-puts "=====会員15件を作成しました====="
+puts "=====会員11件を作成しました====="
 
-# 配送先
+# 配送先作成
 customers.each do |customer|
   2.times do
     Address.create!(
       customer: customer,
       name: "#{customer.last_name} #{customer.first_name}",
-      postal_code: Faker::Number.number(digits: 7),
+      postal_code: "0000000",
       address: Faker::Address.full_address
     )
   end
 end
-puts "=====配送先を30件作成しました====="
+puts "=====配送先を作成しました====="
 
-# ジャンル
-puts "=====ジャンルを登録中...====="
-
-genre_names = [
-  "ケーキ",
-  "焼き菓子",
-  "タルト・パイ",
-  "チョコレート菓子",
-  "キャンディ・飴",
-  "砂糖菓子",
-  "ギフト・その他"
-]
-
-genres = genre_names.map do |name|
-  Genre.create!(name: name)
-end
-
+# ジャンル作成
+genre_names = ["ケーキ","焼き菓子","タルト・パイ","チョコレート菓子","キャンディ・飴","砂糖菓子","ギフト・その他"]
+genres = genre_names.map { |name| Genre.create!(name: name) }
 puts "=====ジャンルを7件作成しました====="
 
-# 商品
-puts "=====商品データを登録中...====="
-
-item_data = [
-  { name: "苺のショートケーキ", introduction: "ふわふわスポンジと甘酸っぱい苺のハーモニー", image: "cake01.png", genre: "ケーキ" },
-  { name: "チョコレートケーキ", introduction: "濃厚なチョコの香りと口どけが魅力", image: "chocolate_cake.png", genre: "ケーキ" },
-  { name: "チーズケーキ", introduction: "ベイクドタイプの濃厚チーズケーキ", image: "cheesecake.png", genre: "ケーキ" },
-  { name: "モンブラン", introduction: "栗の風味が香る上品な味わい", image: "montblanc.png", genre: "ケーキ" },
-  { name: "フィナンシェ", introduction: "焦がしバター香るしっとり焼き菓子", image: "financier.png", genre: "焼き菓子" },
-  { name: "マドレーヌ", introduction: "レモンが香る定番の焼き菓子", image: "madeleine.png", genre: "焼き菓子" },
-  { name: "クッキー詰め合わせ", introduction: "バター香る手作りクッキーのセット", image: "yakigashi01.png", genre: "ギフト・その他" },
-  { name: "プリン", introduction: "とろけるなめらか食感のカスタードプリン", image: "pudding01.png", genre: "ケーキ" },
-  { name: "カスタードタルト", introduction: "サクサク生地にたっぷりカスタード", image: "custard_tart.png", genre: "タルト・パイ" },
-  { name: "アップルパイ", introduction: "リンゴの甘酸っぱさが広がる伝統の味", image: "apple_pie.png", genre: "タルト・パイ" },
-  { name: "キャンディセット", introduction: "カラフルで可愛いキャンディ詰め合わせ", image: "candies.png", genre: "キャンディ・飴" },
-  { name: "マカロン", introduction: "フランス風の繊細な焼き菓子", image: "macaron.png", genre: "砂糖菓子" },
-  { name: "シュークリーム", introduction: "カスタードがたっぷり入った人気商品", image: "cream_puff.png", genre: "ケーキ" },
-  { name: "ガトーショコラ", introduction: "しっとり濃厚なガトーショコラ", image: "gateau_chocolat.png", genre: "チョコレート菓子" },
-  { name: "キャンディ", introduction: "カラフルでどれも美味しいキャンディ", image: "candy01.png", genre: "キャンディ・飴" }
-]
-
+# 商品作成
 items = []
+item_data = [
+  { name: "苺のショートケーキ", introduction: "ふわふわスポンジと甘酸っぱい苺のハーモニー", image: "cake01.png", genre: "ケーキ", price: 400 },
+  { name: "チョコレートケーキ", introduction: "濃厚なチョコの香りと口どけが魅力", image: "chocolate_cake.png", genre: "ケーキ", price: 400 },
+  { name: "フィナンシェ", introduction: "焦がしバター香るしっとり焼き菓子", image: "financier.png", genre: "焼き菓子", price: 300 },
+  { name: "マドレーヌ", introduction: "レモンが香る定番の焼き菓子", image: "madeleine.png", genre: "焼き菓子", price: 300 },
+  { name: "クッキー詰め合わせ", introduction: "バター香る手作りクッキーのセット", image: "yakigashi01.png", genre: "ギフト・その他", price: 800 },
+  { name: "プリン", introduction: "とろけるなめらか食感のカスタードプリン", image: "pudding01.png", genre: "ケーキ", price: 300 },
+  { name: "カスタードタルト", introduction: "サクサク生地にたっぷりカスタード", image: "custard_tart.png", genre: "タルト・パイ", price: 300 },
+  { name: "アップルパイ", introduction: "リンゴの甘酸っぱさが広がる伝統の味", image: "apple_pie.png", genre: "タルト・パイ", price: 300 },
+  { name: "マカロン", introduction: "フランス風の繊細な焼き菓子", image: "macaron.png", genre: "砂糖菓子", price: 200 },
+  { name: "ガトーショコラ", introduction: "しっとり濃厚なガトーショコラ", image: "gateau_chocolat.png", genre: "チョコレート菓子", price: 300 },
+  { name: "キャンディ", introduction: "カラフルでどれも美味しいキャンディ", image: "candy01.png", genre: "キャンディ・飴", price: 100 }
+]
 
 item_data.each do |data|
   genre = genres.find { |g| g.name == data[:genre] } || genres.sample
@@ -127,67 +83,66 @@ item_data.each do |data|
     name: data[:name],
     introduction: data[:introduction],
     genre: genre,
-    price: rand(300..800),
-    is_active: 1
+    price: data[:price],
+    is_active: true
   )
 
-  # 画像ファイルをattach（app/assets/images/items/ 以下に保存）
   image_path = Rails.root.join("app/assets/images/items/#{data[:image]}")
   if File.exist?(image_path)
     item.item_image.attach(io: File.open(image_path), filename: data[:image])
-  else
-    puts "=====⚠️ 画像ファイルが見つかりません=====: #{data[:image]}"
   end
 
   items << item
 end
+puts "=====商品11件を作成しました（画像付き）====="
 
-puts "=====商品15件を作成しました（画像付き）====="
-
-# カートアイテム
-customers.each do |customer|
-  3.times do
-    CartItem.create!(
-      customer: customer,
-      item: items.sample,
-      amount: rand(1..5)
-    )
-    sleep(0.05)
-  end
-end
-puts "=====カートアイテムを作成しました====="
-
-# 注文
-orders = []
-15.times do
-  customer = customers.sample
-  orders << Order.create!(
+# カートアイテム作成
+customer = Customer.find(1)
+3.times do
+  CartItem.create!(
     customer: customer,
-    postal_code: Faker::Number.number(digits: 7),
-    address: Faker::Address.full_address,
-    name: "#{customer.last_name} #{customer.first_name}",
-    shipping_cost: 800,
-    total_payment: rand(1000..5000),
-    payment_method: rand(0..1),
-    status: rand(0..4)
+    item: items.sample,
+    amount: 2
   )
 end
-puts "=====注文15件を作成しました====="
+puts "=====会員ID1のカートアイテムを作成しました====="
 
-# 注文詳細
-orders.each do |order|
-  rand(1..5).times do
-    item = items.sample
+# 注文、注文明細作成
+11.times do |i|
+  customer = customers.sample
+  order = Order.create!(
+    customer: customer,
+    postal_code: "0000000",
+    address: customer.address,
+    name: "#{customer.last_name} #{customer.first_name}",
+    shipping_cost: 800,
+    total_payment: 0,
+    payment_method: 0,
+    status: 0
+  )
+
+  if i == 10
+    2.times do
+      item = items.sample
+      OrderDetail.create!(
+        order: order,
+        item: item,
+        price: item.price,
+        amount: 2,
+        making_status: 0
+      )
+    end
+  else
+    fixed_item = items.first
     OrderDetail.create!(
       order: order,
-      item: item,
-      price: item.price,
-      amount: rand(1..3),
-      making_status: rand(0..3)
+      item: fixed_item,
+      price: fixed_item.price,
+      amount: 1,
+      making_status: 0
     )
-    sleep(0.05)
   end
 end
-puts "=====注文明細を作成しました====="
+puts "=====注文11件と注文明細を作成しました====="
 
 puts "=====テストデータの作成が完了しました！====="
