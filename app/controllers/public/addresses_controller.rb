@@ -1,14 +1,15 @@
 class Public::AddressesController < ApplicationController
-    before_action :authenticate_customer!
-    before_action :set_address, only: [:edit, :update, :destroy]
+  before_action :authenticate_customer!
+  before_action :set_address, only: [:edit, :update, :destroy]
 
-    def index
+  def index
     @address = Address.new
-    @addresses = current_customer.addresses.all 
+    @addresses = current_customer.addresses.all
   end
 
   def create
     @address = current_customer.addresses.new(address_params)
+
     if @address.save
       redirect_to addresses_path, notice: "新しい配送先を登録しました。"
     else
@@ -16,9 +17,6 @@ class Public::AddressesController < ApplicationController
       flash.now[:alert] = "配送先の登録に失敗しました。"
       render :index, status: :unprocessable_entity
     end
-  end
-
-   def edit
   end
 
   def update
