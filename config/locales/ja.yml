@@ -32,7 +32,18 @@ ja:
         password: "パスワード"
         password_confirmation: "パスワード（確認用）"
         is_active: "会員ステータス"
+      address:
+        name: "宛名"
+        postal_code: "郵便番号"
+        address: "住所"
+      cart_item:
+        amount: "同一商品の合計数量"
     errors:
+      models:
+        cart_item:
+          attributes:
+            amount:
+              less_than_or_equal_to: "は10個以下にしてください"
       messages:
         record_invalid: 'バリデーションに失敗しました: %{errors}'
         restrict_dependent_destroy:

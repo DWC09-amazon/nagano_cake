@@ -1,8 +1,8 @@
 class Item < ApplicationRecord
   belongs_to :genre
   has_one_attached :item_image
-  has_many :cart_items, dependent: :destroy
-  has_many :order_details, dependent: :destroy
+  has_many :cart_items,         dependent: :destroy
+  has_many :order_details,      dependent: :destroy
 
   # 商品名は必須
   validates :name, presence: true
@@ -25,5 +25,4 @@ class Item < ApplicationRecord
     end
     item_image.variant(resize_to_limit: [width, height]).processed
   end
-
 end

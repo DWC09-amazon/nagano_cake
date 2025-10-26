@@ -1,5 +1,4 @@
 class Public::CustomersController < ApplicationController
-    
   before_action :authenticate_customer! 
 
   def unsubscribe
@@ -8,7 +7,7 @@ class Public::CustomersController < ApplicationController
 
   def withdraw
     @customer = current_customer
-    
+
     if @customer.update(is_active: false) 
       reset_session
       redirect_to root_path, notice: "退会手続きが完了いたしました。ご利用ありがとうございました。"
@@ -16,15 +15,15 @@ class Public::CustomersController < ApplicationController
       redirect_to my_page_path, alert: "退会処理中にエラーが発生しました。"
     end
   end
-  
+
   def show
     @customer = current_customer
   end
-  
- def edit
+
+  def edit
     @customer = current_customer
   end
-  
+
   def update
     @customer = current_customer
     if @customer.update(customer_params)
