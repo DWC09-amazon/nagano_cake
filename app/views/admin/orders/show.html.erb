@@ -1,0 +1,104 @@
+<div class="container mt-5">
+  <div class="row mb-4">
+    <h4>
+      <span class="px-4" style="background-color: #e8e8e8;">注文詳細画面</span>
+    </h4>
+  </div>
+
+  <%= render "public/shared/error_messages", resource: @order %>
+  <div class="row py-2">
+    <div class="col-md-3 font-weight-bold">購入者</div>
+    <div class="col-md-5">
+      <%= @order.customer.last_name %> <%= @order.customer.first_name %>
+    </div>
+  </div>
+  <div class="row py-2">
+    <div class="col-md-3 font-weight-bold">注文日</div>
+    <div class="col-md-5">
+      <%= l(@order.created_at, format: :short) %>
+    </div>
+  </div>
+  <div class="row py-2">
+    <div class="col-md-3 font-weight-bold">配送先</div>
+    <div class="col-md-5">
+      〒<%= @order.postal_code %> <%= @order.address %><br>
+      <%= @order.name %>
+    </div>
+  </div>
+  <div class="row py-2">
+    <div class="col-md-3 font-weight-bold">支払方法</div>
+    <div class="col-md-5">
+      <%= @order.payment_method_i18n %>
+    </div>
+  </div>
+  <%= form_with model: @order, url: admin_order_path(@order), method: :patch, local: true do |f| %>
+    <div class="row py-2">
+      <div class="col-md-3 font-weight-bold">注文ステータス</div>
+      <div class="col-md-5 d-flex">
+        <%= f.select :status,
+              Order.statuses.keys.map { |k| [Order.status_i18n(k), k] },
+              {},
+              class: "form-control col-md-4 mr-2" %>
+        <%= f.submit "更新", class: "btn btn-success" %>
+      </div>
+    </div>
+  <% end %>
+
+
+  <div class="row mt-3">
+    <div class="col-md-8 table-responsive">
+      <table class="table table-hover border-bottom">
+        <thead class="table-active">
+          <tr>
+            <th class="font-weight-bold">商品名</th>
+            <th class="font-weight-bold">単価（税込）</th>
+            <th class="font-weight-bold">数量</th>
+            <th class="font-weight-bold">小計</th>
+            <th class="font-weight-bold">制作ステータス</th>
+            <th></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @order_details.each do |order_detail| %>
+            <%= render "public/shared/error_messages", resource: order_detail %>
+            <%= form_with model: order_detail, url: admin_order_detail_path(order_detail), method: :patch, local: true do |f| %>
+              <tr>
+                <td><%= order_detail.item.name %></td>
+                <td><%= order_detail.item.tax_included_price %></td>
+                <td><%= order_detail.amount %></td>
+                <td><%= order_detail.subtotal %></td>
+                <td>
+                  <%= f.select :making_status,
+                        OrderDetail.making_statuses.keys.map { |k| [OrderDetail.making_status_i18n(k), k] },
+                        {},
+                        class: "form-control" %>
+                </td>
+                <td><%= f.submit "更新", class: "btn btn-success" %></td>
+              </tr>
+            <% end %>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="col-md-3">
+      <table class="table table-borderless">
+        <tbody>
+          <tr>
+            <th class="font-weight-bold">商品合計</th>
+            <td><%= number_to_currency(@total, unit: "円", format: "%n%u", precision: 0 ) %></td>
+          <tr>
+          <tr>
+            <th class="font-weight-bold">送料</th>
+            <td><%= number_to_currency(@order.shipping_cost, unit: "円", format: "%n%u", precision: 0 ) %></td>
+          </tr>
+          <tr>
+            <th class="font-weight-bold">請求額合計</th>
+            <td class="font-weight-bold"><%= number_to_currency(@order.grand_total_price, unit: "円", format: "%n%u", precision: 0 ) %></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

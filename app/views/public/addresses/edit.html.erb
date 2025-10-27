@@ -1,0 +1,42 @@
+<div class="container mt-5">
+  <h4 class="mb-3">
+    <span class="px-4" style="background-color: #e8e8e8;">配送先編集</span>
+  </h4>
+
+  <%= render 'layouts/error_messages', resource: @address %>
+  <div class ="table-responsive">
+    <%= form_with model: @address, local: true do |f| %>
+      <table class="table table-borderless">
+        <tbody>
+          <tr>
+            <th style="width: 30%;">
+              <%= f.label :postal_code, "郵便番号（ハイフンなし）" %>
+            </th>
+            <td class="py-2">
+              <%= f.text_field :postal_code, class: "form-control w-50", placeholder: "0000000" %>
+            </td>
+          </tr>
+          <tr>
+            <th>
+              <%= f.label :address, "住所" %>
+            </th>
+            <td class="py-2 d-flex gap-2">
+              <%= f.text_field :address, class: "form-control w-75", placeholder: "東京都渋谷区代々木神園町0-0" %>
+            </td>
+          </tr>
+          <tr>
+            <th>
+              <%= f.label :name, "宛名" %>
+            </th>
+            <td>
+              <%= f.text_field :name, class: "form-control w-50", placeholder: "令和道子" %>
+            </td>
+            <td>
+              <%= f.submit "変更内容を保存", class: "btn btn-success" %>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    <% end %>
+  </div>
+</div>
