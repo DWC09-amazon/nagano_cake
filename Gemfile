@@ -31,6 +31,8 @@ gem 'bootsnap', '>= 1.4.4', require: false
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  # ダミーデータ作成
+  gem 'faker'
 end
 
 group :development do
@@ -55,10 +57,20 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
+# ユーザー認証機能
 gem 'devise'
 
+# ページネーション
 gem 'kaminari','~> 1.2.1'
 
+# Railsのenumで定義したステータスや属性の日本語表示
 gem "enum_help"
 
-gem 'faker'
+# 地図機能
+gem 'geocoder'
+
+# タグ機能
+gem 'acts-as-taggable-on'
+
+# エラーメッセージや日付などの日本語化
+gem 'rails-i18n'
